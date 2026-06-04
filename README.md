@@ -56,36 +56,53 @@ Use the token as `BITBUCKET_TOKEN` and your Atlassian account email as `BITBUCKE
 
 ## Installation
 
-Download the binary for your platform from the [latest release](https://github.com/bradlycarpenter/bitbucket-mcp/releases/latest):
+Download the binary for your platform from the [latest release](https://github.com/bradlycarpenter/bitbucket-mcp/releases/latest), then follow the steps for your OS.
 
-| Platform | File |
-|---|---|
-| Linux (amd64) | `bitbucket-mcp-linux-amd64` |
-| macOS (Intel) | `bitbucket-mcp-darwin-amd64` |
-| macOS (Apple Silicon) | `bitbucket-mcp-darwin-arm64` |
-| Windows (amd64) | `bitbucket-mcp-windows-amd64.exe` |
+<details>
+<summary>Linux</summary>
 
-On Linux and macOS, mark the binary as executable after downloading:
+Download `bitbucket-mcp-linux-amd64`, mark it executable, and move it into your PATH:
 
 ```sh
-chmod +x bitbucket-mcp-*
+chmod +x bitbucket-mcp-linux-amd64
+mv bitbucket-mcp-linux-amd64 /usr/local/bin/bitbucket-mcp
 ```
 
-## Building from source
+</details>
+
+<details>
+<summary>macOS</summary>
+
+Download the binary for your architecture:
+
+- Apple Silicon: `bitbucket-mcp-darwin-arm64`
+- Intel: `bitbucket-mcp-darwin-amd64`
+
+Mark it executable and move it into your PATH:
 
 ```sh
-go build -o bitbucket-mcp .
+chmod +x bitbucket-mcp-darwin-*
+mv bitbucket-mcp-darwin-* /usr/local/bin/bitbucket-mcp
 ```
+
+</details>
+
+<details>
+<summary>Windows</summary>
+
+Download `bitbucket-mcp-windows-amd64.exe` and move it to a directory of your choice. Note the full path — you will need it when configuring your MCP client.
+
+</details>
 
 ## MCP client configuration
 
-Add the server to your MCP client config. Example for Claude Code:
+Add an entry to your MCP client config pointing at the downloaded binary. Example for Claude Code:
 
 ```json
 {
   "mcpServers": {
     "bitbucket": {
-      "command": "/path/to/bitbucket-mcp",
+      "command": "/usr/local/bin/bitbucket-mcp",
       "env": {
         "BITBUCKET_EMAIL": "user@yourcompany.com",
         "BITBUCKET_TOKEN": "<api-token>",
@@ -95,3 +112,5 @@ Add the server to your MCP client config. Example for Claude Code:
   }
 }
 ```
+
+The server starts automatically when your MCP client launches and communicates over stdio — no separate process management is required.
