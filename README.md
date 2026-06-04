@@ -54,7 +54,24 @@ Use the token as `BITBUCKET_TOKEN` and your Atlassian account email as `BITBUCKE
 | `read:pullrequest:bitbucket` | Read pull requests, commits, diffs, comments, and activity |
 | `write:pullrequest:bitbucket` | Create and update pull requests |
 
-## Building
+## Installation
+
+Download the binary for your platform from the [latest release](https://github.com/bradlycarpenter/bitbucket-mcp/releases/latest):
+
+| Platform | File |
+|---|---|
+| Linux (amd64) | `bitbucket-mcp-linux-amd64` |
+| macOS (Intel) | `bitbucket-mcp-darwin-amd64` |
+| macOS (Apple Silicon) | `bitbucket-mcp-darwin-arm64` |
+| Windows (amd64) | `bitbucket-mcp-windows-amd64.exe` |
+
+On Linux and macOS, mark the binary as executable after downloading:
+
+```sh
+chmod +x bitbucket-mcp-*
+```
+
+## Building from source
 
 ```sh
 go build -o bitbucket-mcp .
